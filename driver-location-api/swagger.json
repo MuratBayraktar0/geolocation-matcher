@@ -1,0 +1,131 @@
+{
+  "swagger": "2.0",
+  "paths": {
+    "/driver/locations": {
+      "post": {
+        "description": "This will create multiple driver locations and return the created driver locations.",
+        "tags": [
+          "drivers"
+        ],
+        "summary": "Creates multiple driver locations.",
+        "operationId": "bulkCreateDriverLocation",
+        "parameters": [
+          {
+            "x-go-name": "Drivers",
+            "name": "locations",
+            "in": "body",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DriverCreateRequestDTO"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "$ref": "#/responses/driverLocationsResponse"
+          }
+        }
+      }
+    },
+    "/driver/locations/nearby": {
+      "get": {
+        "description": "This will return the drivers locations by near.",
+        "tags": [
+          "drivers"
+        ],
+        "summary": "Get drivers locations by near.",
+        "operationId": "getDriversLocationbyNear",
+        "parameters": [
+          {
+            "type": "number",
+            "format": "double",
+            "x-go-name": "Latitude",
+            "name": "latitude",
+            "in": "query"
+          },
+          {
+            "type": "number",
+            "format": "double",
+            "x-go-name": "Longitude",
+            "name": "longitude",
+            "in": "query"
+          },
+          {
+            "type": "number",
+            "format": "double",
+            "x-go-name": "Radius",
+            "name": "radius",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/driverLocationsResponse"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "DriverCreateRequestDTO": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "x-go-name": "ID"
+        },
+        "latitude": {
+          "type": "number",
+          "format": "double",
+          "x-go-name": "Latitude"
+        },
+        "longitude": {
+          "type": "number",
+          "format": "double",
+          "x-go-name": "Longitude"
+        }
+      },
+      "x-go-package": "github.com/bitaksi-case/driver-location-api/internal/application/dtos"
+    },
+    "DriverGetResponseDTO": {
+      "type": "object",
+      "properties": {
+        "distance": {
+          "type": "number",
+          "format": "double",
+          "x-go-name": "Distance"
+        },
+        "id": {
+          "type": "string",
+          "x-go-name": "ID"
+        },
+        "latitude": {
+          "type": "number",
+          "format": "double",
+          "x-go-name": "Latitude"
+        },
+        "longitude": {
+          "type": "number",
+          "format": "double",
+          "x-go-name": "Longitude"
+        }
+      },
+      "x-go-package": "github.com/bitaksi-case/driver-location-api/internal/application/dtos"
+    }
+  },
+  "responses": {
+    "driverLocationsResponse": {
+      "description": "",
+      "headers": {
+        "drivers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DriverGetResponseDTO"
+          }
+        }
+      }
+    }
+  }
+}
