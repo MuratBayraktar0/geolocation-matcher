@@ -1,4 +1,4 @@
-# Bitaksi Case Study
+# Geolocation Matcher
 
 This repository contains two services: a Driver Location API and a Matching API. The Driver Location API uses location data stored in a MongoDB collection, while the Matching API finds the nearest driver with the rider location using the Driver Location API.
 
