@@ -22,6 +22,26 @@ func NewMatchingHandler(ctx context.Context, service *services.MatchingService) 
 	return &MatchingHandler{service: service, ctx: ctx}
 }
 
+// Match swagger:route POST /matching drivers match
+//
+// Match driver locations with rider location.
+//
+// This will match driver locations with rider location.
+//
+//	Parameters:
+//	+ name: radius
+//	  in: query
+//	  description: The radius within which to match drivers
+//	  required: true
+//	  type: number
+//	+ name: limit
+//	  in: query
+//	  description: The maximum number of drivers to match
+//	  required: true
+//	  type: integer
+//
+//	Responses:
+//	  201: MatchingResponse
 func (h *MatchingHandler) Match(ctx *fiber.Ctx) error {
 
 	var matchingRequestDTO dtos.MatchingRequestDTO

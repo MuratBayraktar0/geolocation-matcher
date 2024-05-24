@@ -1,0 +1,87 @@
+{
+  "swagger": "2.0",
+  "paths": {
+    "/matching": {
+      "post": {
+        "description": "This will match driver locations with rider location.",
+        "tags": [
+          "drivers"
+        ],
+        "summary": "Match driver locations with rider location.",
+        "operationId": "match",
+        "parameters": [
+          {
+            "type": "number",
+            "description": "The radius within which to match drivers",
+            "name": "radius",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "description": "The radius within which to match drivers",
+              "type": "number"
+            }
+          },
+          {
+            "type": "integer",
+            "description": "The maximum number of drivers to match",
+            "name": "limit",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "description": "The maximum number of drivers to match",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "$ref": "#/responses/MatchingResponse"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "DriverGetResponseDTO": {
+      "type": "object",
+      "properties": {
+        "distance": {
+          "type": "number",
+          "format": "double",
+          "x-go-name": "Distance"
+        },
+        "id": {
+          "type": "string",
+          "x-go-name": "DriverID"
+        },
+        "latitude": {
+          "type": "number",
+          "format": "double",
+          "x-go-name": "Latitude"
+        },
+        "longitude": {
+          "type": "number",
+          "format": "double",
+          "x-go-name": "Longitude"
+        }
+      },
+      "x-go-package": "github.com/bitaksi-case/matching-api/internal/application/dtos"
+    }
+  },
+  "responses": {
+    "MatchingResponse": {
+      "description": "",
+      "headers": {
+        "matching": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DriverGetResponseDTO"
+          }
+        },
+        "rider_id": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

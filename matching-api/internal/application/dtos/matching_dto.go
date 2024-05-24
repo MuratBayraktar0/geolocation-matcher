@@ -5,6 +5,7 @@ import (
 	"github.com/bitaksi-case/matching-api/internal/errors"
 )
 
+// MatchingRequestDTO swagger:parameters MatchingRequestDTO
 type MatchingRequestDTO struct {
 	RiderID   string  `json:"rider_id"`
 	Latitude  float64 `json:"latitude"`
@@ -30,6 +31,7 @@ func (dto *MatchingRequestDTO) ToMatchingEntity() *entities.Location {
 	return entity
 }
 
+// MatchingResponse swagger:response MatchingResponse
 type MatchingResponseDTO struct {
 	RiderID  string                 `json:"rider_id"`
 	Matching []DriverGetResponseDTO `json:"matching"`
